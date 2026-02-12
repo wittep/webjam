@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm & Clock</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for a modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white font-sans flex items-center justify-center min-h-screen">
+
+    <main class="w-full max-w-md mx-auto p-4">
+        <!-- Clock View -->
+        <div id="clock-view" class="text-center">
+            <div id="clock" class="text-7xl md:text-8xl font-bold font-orbitron glowing-text">00:00:00</div>
+            <div id="date" class="text-lg md:text-xl text-gray-400 mt-2">January 1, 2024</div>
+        </div>
+
+        <!-- Alarms View (Initially Hidden) -->
+        <div id="alarms-view" class="hidden">
+            <h2 class="text-3xl font-bold text-center mb-6">Alarms</h2>
+            
+            <!-- Add Alarm Form -->
+            <form id="add-alarm-form" class="flex flex-col sm:flex-row gap-2 mb-6 p-4 bg-white/10 backdrop-blur-lg rounded-xl border border-white/20">
+                <input type="time" id="alarm-time" required class="bg-gray-700 border-none rounded-md p-2 w-full text-white focus:ring-2 focus:ring-cyan-500">
+                <input type="text" id="alarm-label" placeholder="Alarm Label" class="bg-gray-700 border-none rounded-md p-2 w-full text-white focus:ring-2 focus:ring-cyan-500">
+                <button type="submit" class="bg-cyan-500 hover:bg-cyan-600 transition-colors rounded-md p-2 font-semibold w-full sm:w-auto">Add Alarm</button>
+            </form>
+
+            <!-- Alarm List -->
+            <ul id="alarm-list" class="space-y-3">
+                <!-- Alarm items will be injected here by JavaScript -->
+            </ul>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-gray-800/50 backdrop-blur-lg border-t border-white/20">
+        <div class="max-w-md mx-auto flex justify-around">
+            <button id="nav-clock" class="nav-btn p-4 w-full text-cyan-400">Clock</button>
+            <button id="nav-alarms" class="nav-btn p-4 w-full text-gray-400">Alarms</button>
+        </div>
+    </nav>
+
+    <!-- Alarm Trigger Modal -->
+    <div id="alarm-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center hidden z-50">
+        <div class="bg-gray-800 p-8 rounded-2xl shadow-lg text-center border border-white/20">
+            <h2 class="text-3xl font-bold mb-2">Alarm!</h2>
+            <p id="modal-alarm-label" class="text-lg text-gray-300 mb-6">Time to wake up!</p>
+            <button id="dismiss-alarm" class="bg-red-500 hover:bg-red-600 transition-colors rounded-md px-8 py-3 font-semibold">Dismiss</button>
+        </div>
+    </div>
+    
+    <!-- Alarm Sound -->
+    <audio id="alarm-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3" loop></audio>
+
+    <!-- Main Script -->
+    <script src="script.js"></script>
+</body>
+</html>
