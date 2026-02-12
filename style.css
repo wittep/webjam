@@ -1,31 +1,19 @@
 /* Use the imported Google Fonts */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Outfit', sans-serif;
 }
 
-.font-orbitron {
-    font-family: 'Orbitron', sans-serif;
+.font-outfit {
+    font-family: 'Outfit', sans-serif;
 }
 
-/* Glowing text effect for the clock */
-.glowing-text {
-    color: #fff;
-    text-shadow:
-        0 0 7px #fff,
-        0 0 10px #fff,
-        0 0 21px #fff,
-        0 0 42px #0fa,
-        0 0 82px #0fa,
-        0 0 92px #0fa,
-        0 0 102px #0fa,
-        0 0 151px #0fa;
-}
+/* Removed glowing-text for a cleaner look */
 
 /* Custom styles for the alarm toggle switch */
 .toggle-checkbox:checked {
     right: 0;
-    border-color: #22c55e; /* green-500 */
+    border-color: #10b981; /* emerald-500 */
 }
 .toggle-checkbox:checked + .toggle-label {
-    background-color: #22c55e; /* green-500 */
+    background-color: #10b981; /* emerald-500 */
 }

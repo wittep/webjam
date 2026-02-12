@@ -41,15 +41,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function showView(view) {
         clockView.classList.add('hidden');
         alarmsView.classList.add('hidden');
-        navClock.classList.replace('text-cyan-400', 'text-gray-400');
-        navAlarms.classList.replace('text-cyan-400', 'text-gray-400');
+        
+        // Reset nav styles
+        navClock.className = 'nav-btn py-2 px-4 text-sm font-medium tracking-wide text-neutral-500 hover:text-neutral-300 border-b-2 border-transparent transition-all';
+        navAlarms.className = 'nav-btn py-2 px-4 text-sm font-medium tracking-wide text-neutral-500 hover:text-neutral-300 border-b-2 border-transparent transition-all';
 
         if (view === 'clock') {
             clockView.classList.remove('hidden');
-            navClock.classList.replace('text-gray-400', 'text-cyan-400');
+            navClock.className = 'nav-btn py-2 px-4 text-sm font-medium tracking-wide text-white border-b-2 border-white transition-all';
         } else if (view === 'alarms') {
             alarmsView.classList.remove('hidden');
-            navAlarms.classList.replace('text-gray-400', 'text-cyan-400');
+            navAlarms.className = 'nav-btn py-2 px-4 text-sm font-medium tracking-wide text-white border-b-2 border-white transition-all';
         }
     }
 
@@ -64,27 +66,27 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderAlarms() {
         alarmList.innerHTML = ''; // Clear existing list
         if (alarms.length === 0) {
-            alarmList.innerHTML = `<li class="text-center text-gray-500">No alarms set.</li>`;
+            alarmList.innerHTML = `<li class="text-center text-neutral-600 font-light mt-10">No alarms set yet.</li>`;
             return;
         }
 
         alarms.forEach(alarm => {
             const li = document.createElement('li');
-            li.className = 'flex items-center justify-between p-4 bg-white/10 backdrop-blur-lg rounded-xl border border-white/20';
+            li.className = 'group flex items-center justify-between p-4 border-b border-neutral-900 hover:bg-neutral-900/50 transition-colors rounded-lg';
             li.dataset.id = alarm.id;
 
             li.innerHTML = `
-                <div>
-                    <div class="text-2xl font-bold">${alarm.time}</div>
-                    <div class="text-sm text-gray-300">${alarm.label}</div>
+                <div class="flex flex-col">
+                    <div class="text-3xl font-light text-white font-outfit">${alarm.time}</div>
+                    <div class="text-xs text-neutral-500 uppercase tracking-wider">${alarm.label}</div>
                 </div>
                 <div class="flex items-center gap-4">
                     <!-- Toggle Switch -->
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" value="" class="sr-only peer" ${alarm.enabled ? 'checked' : ''}>
-                        <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-focus:ring-4 peer-focus:ring-cyan-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
+                        <div class="w-9 h-5 bg-neutral-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-neutral-500 after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white peer-checked:after:border-white"></div>
                     </label>
-                    <button class="delete-alarm-btn text-red-500 hover:text-red-400">
+                    <button class="delete-alarm-btn text-neutral-600 hover:text-rose-500 transition-colors opacity-0 group-hover:opacity-100 p-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                     </button>
                 </div>
@@ -150,6 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function triggerAlarm(alarm) {
         modalAlarmLabel.textContent = alarm.label;
+        // Show current time in modal
+        document.getElementById('modal-time-display').textContent = alarm.time;
         alarmModal.classList.remove('hidden');
         alarmSound.play();
     }
